@@ -3,29 +3,35 @@ package com.example.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Users implements Serializable{
+public class Usuario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name = "id")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(name = "name")
 	private String name;
+	@Column(name = "email")
 	private String email;
+	@Column(name = "phone")
 	private String phone;
+	@Column(name = "password")
 	private String password;
 	
-	public Users() {
+	public Usuario() {
 		
 	}
 
-	public Users(Long id,String name, String email, String phone, String password) {
+	public Usuario(Long id,String name, String email, String phone, String password) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -87,7 +93,7 @@ public class Users implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
 	

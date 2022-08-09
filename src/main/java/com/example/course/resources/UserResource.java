@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.course.entities.Users;
+import com.example.course.entities.Usuario;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
 	
 	@GetMapping
-	 public ResponseEntity<Users> findAll(){
+	 public ResponseEntity<Usuario> findAll(){
 		 
-		Users u = new Users(1l, "Maria", "maria@gmail.com", "99999999", "12345");
+		Usuario u = new Usuario(1l, "Maria", "maria@gmail.com", "99999999", "12345");
 		return ResponseEntity.ok().body(u);
 		
 		
