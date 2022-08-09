@@ -18,7 +18,7 @@ public class TestConfig implements CommandLineRunner{ //interface que permite fa
 	private UserRepository userRepository; //userRepository eh o objeto que acessa os dados
 
 	@Override
-	public void run(String... args) throws Exception { //roda tudo qu estiver aqui dentro
+	public void run(String... args) throws Exception { //roda tudo que estiver aqui dentro
 		Usuario u1 = new Usuario(null, "Maria Brown", "maria@gmail.com", "988888888", "123456"); //id eh nulo pois vai ser gerado pelo bd
 		Usuario u2 = new Usuario(null, "Alex Green", "alex@gmail.com", "977777777", "123456"); //id eh nulo pois vai ser gerado pelo bd
 		
