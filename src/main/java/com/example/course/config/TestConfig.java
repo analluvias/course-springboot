@@ -43,12 +43,24 @@ public class TestConfig implements CommandLineRunner{ //interface que permite fa
 		
 		Product p1 = new Product(null, "The Lord of The Rings", "aaaaaaaaa.", 90.5, "");
 		Product p2 = new Product(null, "Smart tv", "bbbbbbbbb.", 2190.0, "");
-		Product p3 = new Product(null, "PC gamer", "ccccccccc.", 1200.0, "");
-		Product p4 = new Product(null, "Rails for Dummies", "dddddddd.", 100.99, "");
+		Product p3 = new Product(null, "Macbook Pro", "cccccc.", 1250.0, "");
+		Product p4 = new Product(null, "PC gamer", "dddddddd.", 1200.0, "");
+		Product p5 = new Product(null, "Rails for Dummies", "eeeee.", 100.99, "");
 		
 		
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2,cat3));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
+		
+		//depois de salvar produtos e categorias vou associá-los
+		p1.getCategories().add(cat2);  //p1 tem a cat2
+		p2.getCategories().add(cat1);  //p2 tem a cat1
+		p2.getCategories().add(cat3);  //p2 tem a cat3
+		p3.getCategories().add(cat3);  //p3 tem a cat3
+		p4.getCategories().add(cat3);  //p4 tem a cat3
+		p5.getCategories().add(cat2);  //p5 tem a cat2
+		
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5)); //para salvar a associação eu chamo a classe em que eu fiz o mapeamento
+		
 		
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456"); //id eh nulo pois vai ser gerado pelo bd
 		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456"); //id eh nulo pois vai ser gerado pelo bd
