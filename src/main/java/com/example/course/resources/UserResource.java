@@ -27,6 +27,7 @@ public class UserResource {
 	@Autowired
 	private UserService service;
 	
+	
 	@GetMapping  //informando que é uma requisição do tipo get
 	 public ResponseEntity<List <User>> findAll(){ //retorna uma lista de usuarios
 		List<User> list = service.findAll();
@@ -35,6 +36,7 @@ public class UserResource {
 		
 	 }
 	
+	
 	@GetMapping(value = "/{id}") //informando que é uma requisição do tipo get e que aceita um id dentro da url: localhost:8080/users/1
 	public ResponseEntity<User> findById(@PathVariable Long id){ //retorna um unico usuario
 		User obj = service.findById(id);
@@ -42,6 +44,7 @@ public class UserResource {
 		return ResponseEntity.ok().body(obj); //retorna o usuario + .ok() - msgUserService.javapara indicar que teve sucesso + .body(obj) - no corpo da requisição vai estar o obj retornado
 		
 	}
+	
 	
 	@PostMapping
 	public ResponseEntity<User> insert(@RequestBody User obj){ // @RequestBody  Para dizer que o obj vai chegar no modo json e vai ser desserializado para o tipo User
@@ -59,6 +62,7 @@ public class UserResource {
 		/* A URI CRIADA ESTARÁ NA MENSAGEM DE CRIADO DENTRO DO HEADERS - LOCATION */
 	}
 	
+	
 	@DeleteMapping(value = "/{id}") //informando que é uma requisição do tipo Delete e que aceita um id dentro da url: localhost:8080/users/1
 	public ResponseEntity<Void> delete(@PathVariable Long id){ //@PathVariable informa que essa variável chega pela url
 	
@@ -69,6 +73,7 @@ public class UserResource {
 		//esse retorna vai enviar a mensagem 204: que informa que não há mensagem de retorno
 		return ResponseEntity.noContent().build();
 	}
+	
 	
 	@PutMapping(value = "/{id}") //informando que é uma requisição do tipo PUT (update) e que aceita um id dentro da url: localhost:8080/users/1
 	public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj){ //@PathVariable informa que essa variável chega pela url
