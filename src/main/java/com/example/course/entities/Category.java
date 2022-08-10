@@ -25,7 +25,7 @@ public class Category implements Serializable{
 	private Long id;
 	private String name;
 	
-	@JsonIgnore //evita problema de recursividade
+	@JsonIgnore //impede que quando category for chamado por produto, ele crie e retorne um set de produtos e gere recursividade
 	@ManyToMany(mappedBy = "categories") //referencia do mapeamento que está em Product, acima da lista "categories"
 	private Set<Product> products= new HashSet<>();
 	

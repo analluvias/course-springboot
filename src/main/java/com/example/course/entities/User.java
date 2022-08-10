@@ -34,7 +34,8 @@ public class User implements Serializable{
 	@Column(name = "password")
 	private String password;
 	
-	@JsonIgnore
+	@JsonIgnore //impede que quando user for chamado por Order, ele crie outra lista de order
+				//além de impedir que User envie a lista de Orders para o serviço
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>(); //um pedido tem um usuário
 	

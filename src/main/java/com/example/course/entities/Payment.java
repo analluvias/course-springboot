@@ -1,13 +1,38 @@
 package com.example.course.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-public class Payment {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+//ESSA É A CLASSE DEPENDENTE, SEGUINDO O DIAGRAMA DE CLASSES
+//POIS UM PEDIDO PODE TER 0 OU 1 PAGAMENTOS
+//MAS UM PAGAMENTO NECESSARIAMENTE TEM UM PEDIDO
+//ENTÃO VAMOS COLOCAR A ASSOCIAÇÃO ONE TO ONE AQUI
+@Entity
+@Table(name = "tb_payment")
+public class Payment implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Instant moment;
 	
+	@JsonIgnore
+	@OneToOne
+	@MapsId
 	private Order order;
 
 	public Payment() {

@@ -42,9 +42,9 @@ public class Order implements Serializable{
 	@OneToMany(mappedBy = "id.order") //mapeado pelo atributo id (pk composta) de OrdemItem, que tem o order
 	private Set<OrderItem> items = new HashSet<>(); //lista com a tabela de associação entre pedido e produto
 	
-	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL) // a chave estrangeira vai ser order ta tabela payment
-	private Payment payment;								//no caso de uma associação de 1 para 1, as duas entidades deverão ter o mesmo id, 
-														   //SE O PEDIDO FOR CÓD. 5, ENTÃO O PAGAMENTO TB SERÁ COD.5, por isso usamos o cascateType
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL) //no caso de uma associação de 1 para 1, as duas entidades deverão ter o mesmo id, 
+	private Payment payment;								//SE O PEDIDO FOR CÓD. 5, ENTÃO O PAGAMENTO TB SERÁ COD.5, por isso usamos o cascateType
+														   // não há chave estrangeira em order, mas sim uma equidade de id's para associação de ambas as tabelas
 	
 	public Order() {
 		
@@ -103,6 +103,16 @@ public class Order implements Serializable{
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+	
+	public Double getTotal() {
+		Double sum = 0.0;
+		
+		for (OrderItem x : items) {
+			sum += x.getSubTotal();
+		}
+		
+		return sum;
 	}
 
 	@Override

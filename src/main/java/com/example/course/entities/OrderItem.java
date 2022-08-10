@@ -68,6 +68,11 @@ public class OrderItem implements Serializable{
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
+	//sempre que quisermos que um método apareça no json ou xml, começamos seu nome com get
+	public Double getSubTotal() {
+		return price * quantity;
+	}
 
 	@Override
 	public int hashCode() {
