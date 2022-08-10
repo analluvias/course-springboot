@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.example.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_order_item")
@@ -16,7 +17,7 @@ public class OrderItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId //ianotação para id composto
-	private OrderItemPK id; //classe que vai ser a chave composta
+	private OrderItemPK id = new OrderItemPK(); //classe que vai ser a chave composta
 	
 	private Integer quantity;
 	
@@ -34,6 +35,7 @@ public class OrderItem implements Serializable{
 		this.price = price;
 	}
 	
+	@JsonIgnore //impede que haja um looping: pedido chama order e order chama pedido infinitamente
 	public Order getOrder() {
 		return id.getOrder();
 	}
