@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,15 @@ public class UserResource {
 		/* A URI CRIADA ESTARÁ NA MENSAGEM DE CRIADO DENTRO DO HEADERS - LOCATION */
 	}
 	
+	@DeleteMapping(value = "/{id}") //informando que é uma requisição do tipo Delete e que aceita um id dentro da url: localhost:8080/users/1
+	public ResponseEntity<Void> delete(@PathVariable Long id){ //@PathVariable informa que essa variável chega pela url
 	
+		/* ResponseEntity<Void> usamos para quando a nossa requisição dá um retorno vazio, ou seja, não vai retornar o user */
+		
+		service.delete(id); //chamando o service, que por sua vez vai chamar o repositório (que efetivamente fará a deleção
+		
+		//esse retorna vai enviar a mensagem 204: que informa que não há mensagem de retorno
+		return ResponseEntity.noContent().build();
+	}
 
 }
