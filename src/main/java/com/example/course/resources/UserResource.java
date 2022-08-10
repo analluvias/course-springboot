@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,10 +64,19 @@ public class UserResource {
 	
 		/* ResponseEntity<Void> usamos para quando a nossa requisição dá um retorno vazio, ou seja, não vai retornar o user */
 		
-		service.delete(id); //chamando o service, que por sua vez vai chamar o repositório (que efetivamente fará a deleção
+		service.delete(id); //chamando o service, que por sua vez vai chamar o repositório (que efetivamente fará a deleção)
 		
 		//esse retorna vai enviar a mensagem 204: que informa que não há mensagem de retorno
 		return ResponseEntity.noContent().build();
 	}
-
+	
+	@PutMapping(value = "/{id}") //informando que é uma requisição do tipo PUT (update) e que aceita um id dentro da url: localhost:8080/users/1
+	public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj){ //@PathVariable informa que essa variável chega pela url
+																					 //@RequestBody informa que vai receber um json com os pedidos de update
+		
+		obj = service.update(id, obj); //chamo o service que , que por sua vez vai chamar o repositório (que efetivamente fará a atualização)
+		
+		return ResponseEntity.ok().body(obj); 
+		
+	}
 }
